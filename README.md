@@ -7,3 +7,6 @@ Traversal (for loop, for ...of loop, for ...in loop, forEach, map, while, do whi
 insertion (Push, unshift, concat, splice, spread)
 searching (indexof, lastindexof, includes, find, findindex, filter, some, every)
 Deletion (splice, pop, shift, filter, slice, delete)
+
+Date: 12/12/24
+Topics: Stack Implementation and Utilisation
