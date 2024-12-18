@@ -1,34 +1,74 @@
-function size(arr){
-    return arr.length;
-  }
-  function pop(arr){
-    return arr.pop();
-  }
-  
-  function push(arr,ele){
-    return arr.push(ele);
-  }
-  
-  function peek(arr){
-    return arr[size(arr)-1];
-  }
-  
-  function isEmpty(arr){
-    if(arr.length === 0){
-      return true;
+class Stack {
+    constructor() {
+      this.items = [];
     }
-    return false;
+  
+    // Add an element to the stack
+    push(element) {
+      this.items.push(element);
+    }
+  
+    // Remove and return the top element from the stack
+    pop() {
+      if (this.isEmpty()) {
+        return "Stack is empty";
+      }
+      return this.items.pop();
+    }
+  
+    // Return the top element without removing it
+    peek() {
+      if (this.isEmpty()) {
+        return "Stack is empty";
+      }
+      return this.items[this.items.length - 1];
+    }
+  
+    // Check if the stack is empty
+    isEmpty() {
+      return this.items.length === 0;
+    }
+  
+    // Return the size of the stack
+    size() {
+      return this.items.length;
+    }
+  
+    // Clear the stack
+    clear() {
+      this.items = [];
+    }
   }
   
-  function printStack(arr){
-    return arr.join();
+  // Example usage:
+  const stack = new Stack();
+
+
+// Input: A + B * C + D
+// Output: ABC*+D+
+
+function infixToPrefix(str) {
+  let stack = new Stack()
+  let n = str.length;
+  let ans = "";
+
+  for (let i = 0; i < n; i++) {
+      if (str.charAt(i) != "+" && str.charAt(i) != "-" && str.charAt(i) != "*" && str.charAt(i) != "/") {
+          stack.push(str.charAt(i));
+      } else {
+          ans += str.charAt(i);
+      }
+
+      while (ans.length > stack.length) {
+          ans += stack.pop();
+      }
   }
-  
-  module.exports = {
-    size,
-    pop,
-    push,
-    peek,
-    isEmpty,
-    printStack
-  }
+
+  return ans;
+}
+
+console.log(infixToPrefix("A + B * C + D"));
+// Output: ABC*+D+
+
+
+
