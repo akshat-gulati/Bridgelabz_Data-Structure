@@ -1,7 +1,8 @@
+
+
 // Detect Loop in a linkedList------------------------------
 
-class Solution {
-    detectLoop(head) {
+    function detectLoop(head) {
     
         let slow = head
         let fast = head
@@ -16,13 +17,11 @@ class Solution {
         }
         return false
     }
-}
 
 
 // Remove Loop in a linkedList------------------------------
 
-class Solution {
-    removeLoop(head) {
+function removeLoop(head) {
         if (head == null || head.next == null) {
             return head;
         }
@@ -54,13 +53,12 @@ class Solution {
 
         return head;
     }
-}
 
 
 // Kth from End of Linked List ------------------------------
 
-class Solution {
-    getKthFromLast(head, k) {
+
+function getKthFromLast(head, k) {
         
         if(head == null){
             return head.data
@@ -86,12 +84,12 @@ class Solution {
         }
         return slow.data
     }
-}
+
 
 // Middle of the linked list ------------------------------
 
-class Solution {
-    getMiddle(head) {
+
+function getMiddle(head) {
         
         if(head == null && head.next == null){
             return head.data
@@ -108,13 +106,13 @@ class Solution {
         
         return slow.data
     }
-}
+
 
 // Check Palindrome ------------------------------
 
-class Solution {
+
     // Function to check whether the list is palindrome.
-    isPalindrome(head) {
+    function isPalindrome(head) {
         let stack = [];
         
         let helper = head;
@@ -132,24 +130,14 @@ class Solution {
         }
         return true;
     }
-}
+
 
 // Merge 2 sorted LinkedList ---------------------------------
 
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} list1
- * @param {ListNode} list2
- * @return {ListNode}
- */
-var mergeTwoLists = function(list1, list2) {
-    let dummy = new ListNode(0);
+const {LinkedList,Node} = require('./LinkedList');
+
+function mergeTwoLists(list1, list2) {
+    let dummy = new Node(0);
     let temp = dummy;
 
     while (list1 !== null && list2 !== null) {
@@ -170,4 +158,28 @@ var mergeTwoLists = function(list1, list2) {
     }
 
     return dummy.next;
-};
+}
+
+// Create first sorted linked list
+const list1 = new LinkedList();
+list1.add(1);
+list1.add(3);
+list1.add(5);
+list1.add(7);
+
+// Create second sorted linked list
+const list2 = new LinkedList();
+list2.add(2);
+list2.add(4);
+list2.add(6);
+list2.add(8);
+
+// Merge the two lists
+const mergedHead = mergeTwoLists(list1.head, list2.head);
+
+// Print the merged list
+let current = mergedHead;
+while (current) {
+    console.log(current.val);
+    current = current.next;
+}

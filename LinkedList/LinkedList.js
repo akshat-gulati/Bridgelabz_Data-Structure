@@ -1,6 +1,6 @@
 class Node {
-    constructor(value) {
-        this.value = value;
+    constructor(val) {
+        this.val = val;
         this.next = null;
     }
 }
@@ -11,9 +11,8 @@ class LinkedList {
         this.size = 0;
     }
 
-    // Add a node at the end of the list
-    add(value) {
-        const newNode = new Node(value);
+    add(val) {
+        const newNode = new Node(val);
         if (!this.head) {
             this.head = newNode;
         } else {
@@ -26,11 +25,10 @@ class LinkedList {
         this.size++;
     }
 
-    // Remove a node from the list
-    remove(value) {
+    remove(val) {
         if (!this.head) return null;
 
-        if (this.head.value === value) {
+        if (this.head.val === val) {
             this.head = this.head.next;
             this.size--;
             return;
@@ -38,7 +36,7 @@ class LinkedList {
 
         let current = this.head;
         let previous = null;
-        while (current && current.value !== value) {
+        while (current && current.val !== val) {
             previous = current;
             current = current.next;
         }
@@ -49,21 +47,13 @@ class LinkedList {
         }
     }
 
-    // Print the list
     print() {
         let current = this.head;
         while (current) {
-            console.log(current.value);
+            console.log(current.val);
             current = current.next;
         }
     }
 }
 
-// Example usage:
-const list = new LinkedList();
-list.add(10);
-list.add(20);
-list.add(30);
-list.print(); // Output: 10 20 30
-list.remove(20);
-list.print(); // Output: 10 30
+module.exports = {LinkedList,Node};
