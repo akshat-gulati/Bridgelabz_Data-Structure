@@ -141,7 +141,7 @@ function mergeTwoLists(list1, list2) {
     let temp = dummy;
 
     while (list1 !== null && list2 !== null) {
-        if (list1.val <= list2.val) {
+        if (list1.val <= list2.val) { 
             temp.next = list1;
             list1 = list1.next;
         } else {
@@ -160,26 +160,48 @@ function mergeTwoLists(list1, list2) {
     return dummy.next;
 }
 
-// Create first sorted linked list
 const list1 = new LinkedList();
 list1.add(1);
 list1.add(3);
 list1.add(5);
 list1.add(7);
 
-// Create second sorted linked list
 const list2 = new LinkedList();
+list2.add(1);
 list2.add(2);
 list2.add(4);
 list2.add(6);
 list2.add(8);
 
-// Merge the two lists
 const mergedHead = mergeTwoLists(list1.head, list2.head);
 
-// Print the merged list
+// Uncommented the code to print the merged list
 let current = mergedHead;
 while (current) {
-    console.log(current.val);
+    // console.log(current.val); 
     current = current.next;
+}
+
+// Remove duplicate ----------------------------------------------------
+
+function removeDuplicate(head) {
+    if (head === null) return head;
+
+    let temp = head;
+
+    while (temp !== null && temp.next !== null) {
+        if (temp.val === temp.next.val) {
+            temp.next = temp.next.next;
+        } else {
+            temp = temp.next;
+        }
+    }
+
+    return head;
+}
+
+let head = removeDuplicate(mergedHead);
+while (head != null) {
+    console.log(head.val);
+    head = head.next;
 }
