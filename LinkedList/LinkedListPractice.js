@@ -1,5 +1,3 @@
-
-
 // Detect Loop in a linkedList------------------------------
 
     function detectLoop(head) {
@@ -17,7 +15,6 @@
         }
         return false
     }
-
 
 // Remove Loop in a linkedList------------------------------
 
@@ -54,9 +51,7 @@ function removeLoop(head) {
         return head;
     }
 
-
 // Kth from End of Linked List ------------------------------
-
 
 function getKthFromLast(head, k) {
         
@@ -85,33 +80,8 @@ function getKthFromLast(head, k) {
         return slow.data
     }
 
-
-// Middle of the linked list ------------------------------
-
-
-function getMiddle(head) {
-        
-        if(head == null && head.next == null){
-            return head.data
-        }
-        
-        // your code here
-        let fast = head
-        let slow = head
-        
-        while(fast != null && fast.next != null){
-            fast = fast.next.next
-            slow = slow.next
-        }
-        
-        return slow.data
-    }
-
-
 // Check Palindrome ------------------------------
 
-
-    // Function to check whether the list is palindrome.
     function isPalindrome(head) {
         let stack = [];
         
@@ -130,7 +100,6 @@ function getMiddle(head) {
         }
         return true;
     }
-
 
 // Merge 2 sorted LinkedList ---------------------------------
 
@@ -174,15 +143,13 @@ list2.add(6);
 list2.add(8);
 
 const mergedHead = mergeTwoLists(list1.head, list2.head);
-
-// Uncommented the code to print the merged list
 let current = mergedHead;
 while (current) {
     // console.log(current.val); 
     current = current.next;
 }
 
-// Remove duplicate ----------------------------------------------------
+// Remove duplicate ---------------------------------------------------------------------------
 
 function removeDuplicate(head) {
     if (head === null) return head;
@@ -201,6 +168,144 @@ function removeDuplicate(head) {
 }
 
 let head = removeDuplicate(mergedHead);
+while (head != null) {
+    // console.log(head.val);
+    head = head.next;
+}
+
+// Middle of the linked list -------------------------------------------------------------
+
+
+function getMiddle(head) {
+        
+    if(head == null && head.next == null){
+        return head.data
+    }
+    
+    // your code here
+    let fast = head
+    let slow = head
+    
+    while(fast != null && fast.next != null){
+        fast = fast.next.next
+        slow = slow.next
+    }
+    
+    return slow.val
+}
+
+// console.log(getMiddle(mergedHead));
+
+// delete middle ----------------------------------------------------------------------------
+
+function deleteMiddle(head) {
+    if (head == null || head.next == null) {
+        return null }
+
+    let fast = head.next.next;
+    let slow = head;
+    let prev = null;
+
+    while (fast != null && fast.next != null) {
+        fast = fast.next.next;
+        prev = slow;
+        slow = slow.next;
+    }
+
+    // Remove the middle node
+    if (prev != null) {
+        prev.next = slow.next;
+    }
+
+    return head;
+}
+
+head = deleteMiddle(mergedHead);
+while (head != null) {
+    // console.log(head.val);
+    head = head.next;
+}
+
+
+// insert at -----------------------------------------------------------------------------------
+
+function insertAt(head, index, data) {
+    let dataNode = new Node(data);
+
+    // If inserting at the head
+    if (index === 0) {
+        dataNode.next = head;
+        return dataNode;
+    }
+
+    let temp = head;
+    while (index > 1 && temp != null) {
+        temp = temp.next;
+        index--;
+    }
+
+    if (temp == null) {
+        throw new Error("Index out of bounds");
+    }
+
+    dataNode.next = temp.next;
+    temp.next = dataNode;
+
+    return head;
+}
+head = insertAt(mergedHead, 2, 100);
+while (head != null) {
+    // console.log(head.val);
+    head = head.next;
+}
+
+// delete at -----------------------------------------------------------
+
+function deleteAt(head, index) {
+    if (index === 0) {
+        return head ? head.next : null;
+    }
+
+    let temp = head;
+    while (index > 1 && temp && temp.next) {
+        temp = temp.next;
+        index--;
+    }
+
+    if (temp && temp.next) {
+        temp.next = temp.next.next;
+    }
+
+    return head;
+}
+
+
+head = deleteAt(mergedHead, 4);
+while (head != null) {
+    console.log(head.val);
+    head = head.next;
+}
+
+console.log("----------------------------------");
+
+
+// reverse -----------------------------------------------------------------
+function reverseLinkedList(head) {
+    let prev = null;
+    let current = head;
+    let next = null;
+
+    while (current !== null) {
+        next = current.next;  
+        current.next = prev;  
+        prev = current;   
+        current = next;
+    }
+
+    return prev;
+}
+
+head = reverseLinkedList(mergedHead);
 while (head != null) {
     console.log(head.val);
     head = head.next;
