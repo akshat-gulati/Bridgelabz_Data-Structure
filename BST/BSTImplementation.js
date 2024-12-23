@@ -1,87 +1,107 @@
-class Node
-{
-    constructor(data)
-    {
+class Node {
+    constructor(data) {
         this.data = data;
         this.left = null;
         this.right = null;
     }
 }
 
-class BinarySearchTree
-{
-    constructor()
-    {
-        // root of a binary search tree
+class BinarySearchTree {
+    constructor() {
         this.root = null;
     }
 
-    // function to be implemented
-    // insert(data)
-
-// helper method which creates a new node to 
-// be inserted and calls insertNode
-insert(data)
-{
-    // Creating a node and initialising 
-    // with data 
-    var newNode = new Node(data);
-                    
-    // root is null then node will
-    // be added to the tree and made root.
-    if(this.root === null)
-        this.root = newNode;
-    else
-
-        // find the correct position in the 
-        // tree and add the node
-        this.insertNode(this.root, newNode);
-}
-
-// Method to insert a node in a tree
-// it moves over the tree to find the location
-// to insert a node with a given data 
-insertNode(node, newNode)
-{
-    // if the data is less than the node
-    // data move left of the tree 
-    if(newNode.data < node.data)
-    {
-        // if left is null insert node here
-        if(node.left === null)
-            node.left = newNode;
+// --------------------------------------------------------------------------------------
+    insert(data) {
+        var newNode = new Node(data);
+        if (this.root === null)
+            this.root = newNode;
         else
-
-            // if left is not null recur until 
-            // null is found
-            this.insertNode(node.left, newNode); 
+            this.insertNode(this.root, newNode);
     }
 
-    // if the data is more than the node
-    // data move right of the tree 
-    else
-    {
-        // if right is null insert node here
-        if(node.right === null)
-            node.right = newNode;
-        else
-
-            // if right is not null recur until 
-            // null is found
-            this.insertNode(node.right,newNode);
+    insertNode(node, newNode) {
+        if (newNode.data < node.data) {
+            if (node.left === null)
+                node.left = newNode;
+            else
+                this.insertNode(node.left, newNode);
+        } else {
+            if (node.right === null)
+                node.right = newNode;
+            else
+                this.insertNode(node.right, newNode);
+        }
     }
-}
 
+// --------------------------------------------------------------------------------------
 
+    remove(data) {
+        this.root = this.removeNode(this.root, data);
+    }
 
-    // remove(data)
-                
+    removeNode(node, key) {
+        if (node === null) return null;
 
-    // Helper function
-    // findMinNode()
-    // getRootNode()
-    // inorder(node)
-    // preorder(node)               
-    // postorder(node)
-    // search(node, data)
+        if (key < node.data) {
+            node.left = this.removeNode(node.left, key);
+            return node;
+        } else if (key > node.data) {
+            node.right = this.removeNode(node.right, key);
+            return node;
+        } else {
+            if (node.left === null && node.right === null) {
+                return null;
+            }
+            if (node.left === null) return node.right;
+            if (node.right === null) return node.left;
+
+            let minNode = this.findMinNode(node.right);
+            node.data = minNode.data;
+            node.right = this.removeNode(node.right, minNode.data);
+            return node;
+        }
+    }
+
+// --------------------------------------------------------------------------------------
+
+    findMinNode(node) {
+        if (node.left === null) return node;
+        return this.findMinNode(node.left);
+    }
+// --------------------------------------------------------------------------------------
+    getRootNode() {
+        return this.root;
+    }
+// --------------------------------------------------------------------------------------
+    inorder(node) {
+        if (node !== null) {
+            this.inorder(node.left);
+            console.log(node.data);
+            this.inorder(node.right);
+        }
+    }
+// --------------------------------------------------------------------------------------
+    preorder(node) {
+        if (node !== null) {
+            console.log(node.data);
+            this.preorder(node.left);
+            this.preorder(node.right);
+        }
+    }
+// --------------------------------------------------------------------------------------
+    postorder(node) {
+        if (node !== null) {
+            this.postorder(node.left);
+            this.postorder(node.right);
+            console.log(node.data);
+        }
+    }
+// --------------------------------------------------------------------------------------
+    search(node, data) {
+        if (node === null || node.data === data) return node;
+
+        if (data < node.data) return this.search(node.left, data);
+        return this.search(node.right, data);
+    }
 }
