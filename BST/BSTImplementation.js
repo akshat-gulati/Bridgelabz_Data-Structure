@@ -104,13 +104,15 @@ class BinarySearchTree {
   }
 }
 
-let bst = new BinarySearchTree();
+// let bst = new BinarySearchTree();
 
-bst.insert(15);
-bst.insert(25);
-bst.insert(10);
-bst.insert(7);
-bst.insert(22);
-bst.insert(17);
-bst.insert(13);
-bst.inorder();
+// bst.insert(15);
+// bst.insert(25);
+// bst.insert(10);
+// bst.insert(7);
+// bst.insert(22);
+// bst.insert(17);
+// bst.insert(13);
+// bst.inorder();
+
+module.exports = {BinarySearchTree,Node};
