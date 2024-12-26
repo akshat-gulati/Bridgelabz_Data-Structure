@@ -30,7 +30,16 @@ class Graph {
         }
         return edges;
     }
+
+    printGraph() {
+        for (let vertex in this.adjacencyList) {
+            console.log(`${vertex} -> ${this.adjacencyList[vertex].join(', ')}`);
+        }
+    }
+
 }
+
+modules.export = Graph;
 
 const graph = new Graph();
 graph.addVertex('A');
